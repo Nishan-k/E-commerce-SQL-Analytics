@@ -1,6 +1,5 @@
 import re
 from pathlib import Path
-import sqlite3
 import pandas as pd
 
 
@@ -8,101 +7,80 @@ import pandas as pd
 
 
 
-# 1. A function to parse .sql files in case if it contains multiple queries:
+# 1. A function to parse .sql files and return the query based on the provided query name:
 
-def parse_sql_queries(file_path: str) -> dict:
+def sql_loader(file_path: str, query_name: str) -> str:
     """
-    This function is responsible for parsing SQL files with named query blocks.
-    
-    Parameters:
-    -----------
-    file_path: The path of the sql file
-
-    Output:
-    -----------
-    returns a dictionary: {'query_name': 'QUERY'}
+    Load a named SQL query from a .sql file.
     """
 
-    # Read the SQL file:
     with open(file_path, "r") as f:
         sql_content = f.read()
 
-    
-    # Split the queries by @query, here regular expression has been used:
     pattern = r'--\s*@query:\s*(\w+)\s*\n(.*?)(?=--\s*@query:|$)'
     matches = re.findall(pattern, sql_content, re.DOTALL)
 
-
     queries = {}
-    for query_name, query_sql in matches:
-        cleaned_sql = query_sql.strip()
-        cleaned_sql = cleaned_sql.rstrip(';').strip()
-        queries[query_name] = cleaned_sql
-    
-    return queries
-
-
-
-# 2. A function that takes in the name defined for a specific query and returns it:
-
-def get_query_from_file(file_path:str, query_name:str) -> str:
-    """
-    A function responsible to extract SQL query based on the name of the query provided.
-
-    Parameters:
-    -----------
-    file_path: The path to the SQL file
-    query_name: The name of the query that we want to extract
-    """
-
-    queries = parse_sql_queries(file_path)
+    for found_query_name, query_sql in matches: 
+        cleaned_sql = query_sql.strip().rstrip(';').strip()
+        queries[found_query_name] = cleaned_sql
 
     if query_name not in queries:
         raise ValueError(
-            f"Query name: {query_name} not found, please pass the correct query name."
-            f"Available query names: {list(queries.keys())}"
+            f"Query name '{query_name}' not found.\n"
+            f"Available queries: {list(queries.keys())}"
         )
 
     return queries[query_name]
 
 
 
-# 3. To read a single query .sql file:
 
-def read_single_sql_query(file_path:str):
+
+# 2. A function responsible to execute the SQL Queries:
+
+def execute_query(conn, sql_path:Path, query_name:str, expected_columns:set[str] | None = None) -> pd.DataFrame:
     """
-    This function reads the .sql files with only one query
+    This function is responsible to execute a named SQL query from a SQL file
     """
 
-    with open(file_path, "r") as f:
-        return f.read()
+    query = sql_loader(sql_path, query_name)
+    df = pd.read_sql_query(query, conn)
+
+    if df.empty:
+        raise ValueError(f"Query: `{query_name}` in {sql_path} returned empty rows.")
+
+    if expected_columns is None:
+        pass    
+    elif expected_columns != df.columns.tolist():        
+        raise ValueError(f"Expected columns: {expected_columns}, got {set(df.columns)}")
+
+    return df
     
 
-
-# # 4. To create a successful database connection:
-
-# def create_db_connection():
-#     db_path = "../data/ecommerce.db"
-#     conn = sqlite3.connect(db_path)
-#     return conn
 
 
 
 # 5. Check duplicats:
 
-def check_duplicates(sql_path:str, conn):
+def check_duplicates(conn) -> pd.DataFrame: 
     """
     Checks for any duplicate rows
     """
-    sql_path = Path(sql_path)
-    query = get_query_from_file(sql_path, 'check_duplicates')
-    result = pd.read_sql_query(query, conn)
-    return result
+    sql_path = Path("../sql/check_duplicates.sql")
+
+    with open(sql_path, "r") as f:
+        sql_query = f.read()
+
+    duplicates = pd.read_sql_query(sql_query, conn)
+    
+    return duplicates
+
 
 
 # 6. Get the available table names:
 
-def extract_table_names(sql_path:str, conn) -> pd.DataFrame:
+def extract_table_names(conn) -> pd.DataFrame:
     """
     Returns the available table names from the database:
 
@@ -114,8 +92,10 @@ def extract_table_names(sql_path:str, conn) -> pd.DataFrame:
     """
 
     # Read the SQL file:
-    sql_path = Path(sql_path)
-    sql_query = read_single_sql_query(file_path=sql_path)
+    sql_path = Path("../sql/get_table_names.sql")
+
+    with open(sql_path, "r") as f:
+        sql_query = f.read()
     tables = pd.read_sql_query(sql_query, conn)
 
     # Validate the results:

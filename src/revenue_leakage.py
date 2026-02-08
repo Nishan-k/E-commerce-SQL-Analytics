@@ -1,31 +1,8 @@
 import pandas as pd
 import numpy as np
 from pathlib import Path
-from utils.helper import get_query_from_file
+from utils.helper import execute_query
 
-
-
-
-
-# 1. A function responsible to execute the SQL Queries:
-
-def execute_query(conn, sql_path:Path, query_name:str, expected_columns:set[str] | None = None) -> pd.DataFrame:
-    """
-    This function is responsible to execute a named SQL query from a SQL file
-    """
-
-    query = get_query_from_file(sql_path, query_name)
-    df = pd.read_sql_query(query, conn)
-
-    if df.empty:
-        raise ValueError(f"Query: `{query_name}` in {sql_path} returned empty rows.")
-
-    if expected_columns is None:
-        pass    
-    elif expected_columns != df.columns.tolist():        
-        raise ValueError(f"Expected columns: {expected_columns}, got {set(df.columns)}")
-
-    return df
 
 
 # --------------------------------
