@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 from pathlib import Path
 from utils.helper import execute_query
 
@@ -9,7 +8,10 @@ from utils.helper import execute_query
 # Revenue Leakage Specific Wrappers:
 # --------------------------------
 
+
+# -----------------------------------------------------------------------------------
 # 1. Get the baseline metrics:
+# -----------------------------------------------------------------------------------
 
 def get_baseline_metrics(conn, sql_base_path:Path) -> pd.DataFrame:
     """
@@ -25,9 +27,30 @@ def get_baseline_metrics(conn, sql_base_path:Path) -> pd.DataFrame:
 
 
 
+# -----------------------------------------------------------------------------------
+# 2. Calculate the revenue leakage percentage:
+# -----------------------------------------------------------------------------------
+
+def generate_revenue_leakage(revenue_baseline_metrics):
+    """
+    A function that calculates the revenue leakage:
+    
+    Parameters:
+    -----------
+    revenue_baseline_metrics: A revenue metrics dataframe
+    """
+    metrics_dict = revenue_baseline_metrics.set_index('Metrics')['Amount_millions'].to_dict()
+    total_expected_revenue = metrics_dict['Total Market Opportunity']
+    total_cancelled_revenue = metrics_dict['Total Revenue Loss From Cancellation']
+    revenue_leakage_percentage = (total_cancelled_revenue / total_expected_revenue) * 100
+    
+    
+    return revenue_leakage_percentage
 
 
-# 2. The breakdown of order counts by order status:
+# -----------------------------------------------------------------------------------
+# 3. The breakdown of order counts by order status:
+# -----------------------------------------------------------------------------------
 
 def get_breakdown_of_orders(conn, sql_base_path:Path) -> pd.DataFrame:
     """
@@ -46,8 +69,9 @@ def get_breakdown_of_orders(conn, sql_base_path:Path) -> pd.DataFrame:
     
 
 
-
-# 3. Break down on canceled orders:
+# -----------------------------------------------------------------------------------
+# 4. Break down on canceled orders:
+# -----------------------------------------------------------------------------------
 
 def get_break_down_on_cncl_orders(conn, sql_base_path:Path) -> dict[str, pd.DataFrame]:
     """
@@ -77,8 +101,9 @@ def get_break_down_on_cncl_orders(conn, sql_base_path:Path) -> dict[str, pd.Data
             }
 
 
-
-# 4. Break down on canceled product category by total amount and their contribution to the revenue leakage:
+# -----------------------------------------------------------------------------------
+# 5. Break down on canceled product category by total amount and their contribution to the revenue leakage:
+# -----------------------------------------------------------------------------------
 
 def get_cncl_by_prod_cat_amount(conn, sql_base_path:Path) -> pd.DataFrame:
     """
@@ -99,7 +124,9 @@ def get_cncl_by_prod_cat_amount(conn, sql_base_path:Path) -> pd.DataFrame:
 
 
 
-# 5. Break down on canceled product category by total volume for VOLUME VS REVENUE Comparison:
+# -----------------------------------------------------------------------------------
+# 6. Break down on canceled product category by total volume for VOLUME VS REVENUE Comparison:
+# -----------------------------------------------------------------------------------
 
 def get_cncl_by_prod_cat_volume(conn, sql_base_path:Path) -> pd.DataFrame:
     """

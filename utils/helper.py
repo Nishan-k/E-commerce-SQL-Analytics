@@ -1,7 +1,7 @@
 import re
 from pathlib import Path
 import pandas as pd
-
+from typing import Optional, Set
 
 
 
@@ -39,7 +39,7 @@ def sql_loader(file_path: str, query_name: str) -> str:
 
 # 2. A function responsible to execute the SQL Queries:
 
-def execute_query(conn, sql_path:Path, query_name:str, expected_columns:set[str] | None = None) -> pd.DataFrame:
+def execute_query(conn, sql_path:Path, query_name:str, expected_columns:Optional[Set[str]] = None) -> pd.DataFrame:
     """
     This function is responsible to execute a named SQL query from a SQL file
     """
