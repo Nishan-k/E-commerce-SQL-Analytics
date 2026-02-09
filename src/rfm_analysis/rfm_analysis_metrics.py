@@ -80,3 +80,24 @@ def get_customer_order_frequency_analysis(conn, sql_base_path:Path) -> pd.DataFr
                          sql_path=sql_base_path / "customer_order_frequency_interpretation.sql",
                          query_name="customer_order_frequency_interpretation",
                          expected_columns=["customer_unique_id", "total_orders", "Interpretation"])
+
+
+
+
+# -----------------------------------------------------------------------------------
+# 4. Monetary Analysis
+# -----------------------------------------------------------------------------------
+
+def get_total_spending_per_customer(conn, sql_base_path:Path) -> pd.DataFrame:
+    """
+    This function is responsible to retunr the total spendings per customer head.
+
+    Returns:
+    --------
+    pd.Dataframe with the total amount spent per customer
+    """
+
+    return execute_query(conn=conn, 
+                         sql_path=sql_base_path / "total_spendings_per_customer.sql",
+                         query_name="total_spendings_per_customer", 
+                         expected_columns=['customer_unique_id', 'total_amount'])

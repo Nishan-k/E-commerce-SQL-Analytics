@@ -1,4 +1,3 @@
-
 -- @query: customer_order_frequency_interpretation
 WITH	customer_full_IDs AS (
 								SELECT	coi.order_id, 

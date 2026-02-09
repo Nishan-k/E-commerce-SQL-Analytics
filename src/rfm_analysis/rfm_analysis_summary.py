@@ -7,9 +7,9 @@ from IPython.display import display, Markdown, Image, HTML
 # ------------------------------------------------------------------------------------
 
 
-def revenue_analysis_summary(recency_table_full, customers_per_bins_labeled_df, fig):
+def get_revenue_analysis_summary(recency_table_full, customers_per_bins_labeled_df, fig):
     """
-    This function is responsible to genereate the summary for the R of RFM analysis
+    This function is responsible to generate the summary for the R of RFM analysis
     i.e. for revenue analysis and takes positional arguement
     """
     display(Markdown(f"""
@@ -52,9 +52,9 @@ declines as time since last purchase increases:
 # 2. Frequency Analysis: Summary
 # ------------------------------------------------------------------------------------
 
-def frequency_analysis_summary(customer_order_frequency_interpretation_counts, fig):
+def get_frequency_analysis_summary(customer_order_frequency_interpretation_counts, fig):
     """
-    This function is responsible to genereate the summary for the F of RFM analysis
+    This function is responsible to generate the summary for the F of RFM analysis
     i.e. for frequency analysis and takes positional arguement
     """
 
@@ -109,4 +109,72 @@ Overall, the Frequency analysis reveals that the business is highly dependent on
 - Loyalty and CRM programs
 
 These insights will be especially valuable when combined with **Monetary value** in the final RFM segmentation.
+"""))
+    
+
+
+
+
+# ------------------------------------------------------------------------------------
+# 3. Monetary Analysis: Summary
+# ------------------------------------------------------------------------------------
+
+def get_monetary_analysis_summary(segment_monetary_summary_w_customer_share, fig):
+    """
+    This function is responsible to generate the summary for the M of RFM analysis
+    i.e. for monetary analysis and takes positional arguement
+    """
+
+    display(Markdown(f"""
+## Monetary Analysis Conclusion:
+
+Monetary analysis focuses on understanding **how much revenue customers generate**, not just how often they purchase.
+While Frequency identifies repeat behavior, **Monetary highlights customer value**.
+
+In this analysis:
+- Only **delivered orders** were considered to ensure that revenue reflects completed transactions.
+- Monetary value was calculated at the **order item level** to capture the true transaction amount, then aggregated to the
+  `customer_unique_id` level.
+- The monetary data was joined with the previously defined **Frequency-based customer segments**, allowing revenue
+  contribution and customer value to be analyzed together."""))
+        
+    display(segment_monetary_summary_w_customer_share)
+        
+    display(Markdown("The chart below displays the comparison between the <b>Volume</b> and <b>Value</b>"))
+    fig.show()
+    fig.write_image("../plot_images/Revenue_contribution_volume_vs_value.png", width=1200, height=600, scale=2)
+    display(Image(filename="../plot_images/Revenue_contribution_volume_vs_value.png"))
+
+
+
+
+
+def get_key_findings_and_intrerp():
+    display(Markdown("""
+### Key Findings:
+
+- **One-Time Buyers** generate the **highest total revenue** overall, primarily due to their overwhelming volume
+  (≈97% of the customer base), despite having the **lowest average revenue per customer**.
+- **Returning, Loyal, and Very Loyal customers**, although significantly fewer in number, contribute **progressively higher
+  average revenue per customer**, indicating stronger individual customer value.
+- **VIP Customers** represent the smallest segment but show **one of the highest average revenues per customer**,
+  highlighting their importance from a long-term value perspective rather than volume.
+- The contrast between **total revenue (volume-driven)** and **average revenue per customer (value-driven)** reveals that
+  revenue concentration alone can be misleading without considering customer quality.
+
+### Business Interpretation:
+
+- Revenue is currently **volume-driven**, dominated by One-Time Buyers.
+- However, **high-frequency segments deliver disproportionately higher value per customer**, making them ideal targets
+  for:
+  - Retention strategies
+  - Personalized marketing
+  - Loyalty and reward programs
+
+The final visualization effectively demonstrates this dual perspective by:
+- Using **Log₁₀ scaled total revenue** to highlight revenue concentration.
+- Overlaying **average revenue per customer** to reveal customer value across segments.
+
+This analysis reinforces the importance of balancing **customer acquisition** with **customer retention and value growth**
+to build a sustainable revenue strategy.
 """))
