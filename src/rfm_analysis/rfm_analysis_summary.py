@@ -44,3 +44,69 @@ declines as time since last purchase increases:
     fig.show()
     fig.write_image("../plot_images/Customers_Distribution_By_Recency.png", width=1200, height=600, scale=2)
     display(Image(filename="../plot_images/Customers_Distribution_By_Recency.png"))
+
+
+
+
+# ------------------------------------------------------------------------------------
+# 2. Frequency Analysis: Summary
+# ------------------------------------------------------------------------------------
+
+def frequency_analysis_summary(customer_order_frequency_interpretation_counts, fig):
+    """
+    This function is responsible to genereate the summary for the F of RFM analysis
+    i.e. for frequency analysis and takes positional arguement
+    """
+
+    display(Markdown("""
+## Frequency Analysis Conclusion:
+
+Frequency measures **how often a customer makes a complete purchase**.
+
+In this analysis:
+- Only orders with `delivered` status were considered to ensure that each counted order represents a 
+**completed and revenue-realized transaction**.
+- Since a single customer in the OLIST dataset may have multiple `customer_id`s across different orders, 
+all frequency calculations were performed at the **`customer_unique_id` level**, which represents a real-world customer.
+- The frequency metric was calculated as the **number of distinct orders per customer**.
+
+The resulting table `customer_order_frequency_interpretation` contains **one row per unique customer**, along with:
+- `total_orders`: total number of completed purchases
+- `Interpretation`: a business-friendly customer segment based on purchase behavior.
+
+To make the results interpretable from a business perspective, customers were segmented as follows:
+
+- **One-Time Buyer**: 1 order  
+- **Returning Customer**: 2 orders  
+- **Loyal Customer**: 3 orders  
+- **Very Loyal Customer**: 4 orders  
+- **VIP Customers**: 5 or more orders
+"""))
+
+    display(customer_order_frequency_interpretation_counts)
+
+
+    display(Markdown(f"""
+The frequency distribution shows a **strongly right-skewed pattern**, indicating that the majority of 
+customers placed only a single order:
+
+- `One-Time Buyer`s dominate the customer base, accounting for **96.947% of all customers**
+- Returning and Loyal customers form a much smaller but strategically important segment
+- VIP Customers represent a very small fraction but are likely to contribute **disproportionately higher lifetime value**
+
+To properly visualize this imbalance, a **logarithmic scale** was used in the frequency distribution chart. 
+This approach prevents one-time buyers from visually overwhelming the chart and allows meaningful comparison 
+between smaller yet valuable customer segments."""))
+
+    fig.show()
+    fig.write_image("../plot_images/Customer_Segmentation_by_Purchase_Frequency.png", width=1200, height=600, scale=2)
+    display(Image(filename="../plot_images/Customer_Segmentation_by_Purchase_Frequency.png"))
+        
+    display(Markdown("""
+Overall, the Frequency analysis reveals that the business is highly dependent on **first-time buyers**, highlighting a significant opportunity for:
+- Retention strategies
+- Repeat purchase incentives
+- Loyalty and CRM programs
+
+These insights will be especially valuable when combined with **Monetary value** in the final RFM segmentation.
+"""))
