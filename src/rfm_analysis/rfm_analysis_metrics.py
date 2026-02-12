@@ -1,6 +1,5 @@
 import pandas as pd
 from pathlib import Path
-import sqlite3
 from utils.helper import sql_loader, execute_query
 
 
