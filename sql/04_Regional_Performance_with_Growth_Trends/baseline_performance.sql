@@ -57,15 +57,14 @@ WITH	order_info_cte AS
         order_count_per_customer AS 
 									(
                                     SELECT	customer_unique_id,
-											COUNT(DISTINCT order_id) AS total_orders
+											COUNT(DISTINCT order_id) AS total_orders,
+                                            MAX(customer_state) AS state
 									FROM	customer_full_info_cte
 									GROUP BY customer_unique_id
                                     )
                                     
-		SELECT	opc.customer_unique_id, 
-				opc.total_orders,
-				c.customer_state
-		FROM	order_count_per_customer opc INNER JOIN	customers c
-				ON	opc.customer_unique_id = c.customer_unique_id;
+		
+        SELECT * FROM order_count_per_customer;
+                                    
                                             
 		

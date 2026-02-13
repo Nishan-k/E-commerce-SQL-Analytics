@@ -12,9 +12,9 @@ from utils.helper import execute_query
 # 1. Get the total revenues by state:
 # -----------------------------------------------------------------------------------
 
-def get_rev_by_state_w_customer_info(conn, sql_base_path:Path) -> pd.DataFrame:
+def get_rev_by_state_at_customer_level(conn, sql_base_path:Path) -> pd.DataFrame:
     """
-    This function will be reponsible to generate total spendings by customer
+    This function will be reponsible to generate spendings by each customer
     along with their address informations like zip-code, city, and state.
 
     Returns:
@@ -33,13 +33,13 @@ def get_rev_by_state_w_customer_info(conn, sql_base_path:Path) -> pd.DataFrame:
 # 2. Get the total volume of orders by state:
 # -----------------------------------------------------------------------------------
 
-def get_order_vol_by_state(conn, sql_base_path:Path) -> pd.DataFrame:
+def get_order_vol_by_state_at_customer_level(conn, sql_base_path:Path) -> pd.DataFrame:
     """
-    This function will be responsible to count the total number of orders per state
+    This function will be responsible to count the total number of orders per state at customer level
 
     Returns:
     -----------
-    pd.Dataframe with the total number of order counts by state
+    pd.Dataframe with the total number of distinct order counts by state at customer level
     """
 
     return execute_query(conn=conn,
