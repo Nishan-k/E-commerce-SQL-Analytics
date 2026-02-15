@@ -66,5 +66,39 @@ WITH	order_info_cte AS
 		
         SELECT * FROM order_count_per_customer;
                                     
+
+
+-- @query: orders_and_revenue_by_time_period_per_state
+
+WITH	ord_lvl_info AS 
+					(SELECT	o.customer_id,
+                            oi.order_id, oi.order_item_id, o.order_purchase_timestamp,
+                            oi.price, 
+                            oi.freight_value
+                    FROM  	order_items oi INNER JOIN orders o
+                            ON oi.order_id = o.order_id
+                    WHERE 	o.order_status = 'delivered'),
+                    
+    
+		cust_ord_info AS 
+						(SELECT	c.customer_unique_id, 
+								oi.order_id, 
+								oi.order_item_id, 
+								STRFTIME("%Y-%m", oi.order_purchase_timestamp) as time_period, 
+								(oi.price + oi.freight_value) AS total_amount,
+								c.customer_state AS state
+						FROM 	ord_lvl_info oi LEFT JOIN customers c
+								ON oi.customer_id = c.customer_id)
+    
+
+        SELECT	time_period,
+				state,
+				COUNT(order_item_id) AS total_orders,
+				SUM(total_amount) as total_revenue
+        FROM 	cust_ord_info
+        GROUP BY time_period, state;
+
+
+
                                             
 		
