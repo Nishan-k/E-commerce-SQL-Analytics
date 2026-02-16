@@ -57,14 +57,9 @@ def plot_total_rev_per_state(df):
                      "x": 0.5,
                      "xanchor": "center"
                  })
-    fig.add_annotation(
-                        x=1.45, y="São Paulo",
-                        text="High volume, lower AOV",
-                        showarrow=True,
-                        arrowhead=2
-                        )
 
-
+     # Save the image as html file:
+    fig.write_html("../plot_html/Revenue_Realization_Per_State.html")
     return fig
 
 
@@ -115,7 +110,9 @@ def plot_total_order_vol_per_state(df):
                      "x": 0.5,
                      "xanchor": "center"
                  })
-
+    
+     # Save the image as html file:
+    fig.write_html("../plot_html/Total_Orders_Per_State.html")
     return fig
 
 
@@ -198,12 +195,112 @@ def plot_aov_wrt_revenue_and_order_vol(df):
             "<span style='font-size: 12px'>Left of red line = Order volume drivers <b>(lower AOV)</b> Right = Premium markets <b>(higher AOV)</b><br></span>",
         xaxis_title="AOV Index (Revenue % ÷ Order Volume %)",
         yaxis_title="States",
-        height=700,
-        width=1000,
         xaxis=dict(range=[0.7, 1.8]),
         showlegend=False
     )
 
     fig.update_yaxes(ticklabelstandoff=14)
+    fig.update_layout(
+    autosize=True,
+    height=None,
+    width=None,
+    margin=dict(l=30, r=30, t=80, b=30)
+    )
+    
+    # Save the image as html file:
+    fig.write_html("../plot_html/TState_Performance_by_AOV_Index.html")
+
     return fig
 
+
+
+
+# ------------------------------------------------------------------------------------------------------------
+# 5. A line chart to display the growth in revenue for top `n` states over the time, where, n is the given parameters:
+# ------------------------------------------------------------------------------------------------------------
+
+def plot_growth_rev_over_time(df, n):
+    """
+    This function takes n as a parameter, where n is the total number of top revenue generating states and plots a line chart
+    to display the growth in the revenue over the time and also returns the top n states as a dataframe along with the other details
+
+    Parameters:
+    ------------
+    df: a dataframe where orders and revenue are aggregated at the month level for each state
+    n: total number of top leading states by the revenue
+
+    Returns:
+    --------
+    A tuple of: (top_n_states_by_rev_data, fig)
+
+    """
+    total_ordrs_and_revn_by_time_period = df
+    # Aggregate the sum of total revenue by the state to find the highest revenue earners to be selected for the line plot:
+    top_n_states_by_rev = (total_ordrs_and_revn_by_time_period.groupby(by=['state'])
+                        ['total_revenue'].sum().sort_values(ascending=False).head(int(f"{n}")).index)
+    
+    # Select only the top n state informations based on the provided paramter n:
+    top_n_states_by_rev_data = (total_ordrs_and_revn_by_time_period[total_ordrs_and_revn_by_time_period['state']
+                                                              .isin(top_n_states_by_rev)].drop(columns=['total_orders']))
+    
+    # plot a line chart where the number of line is determined by the parameter n:
+    fig = px.line(data_frame=top_n_states_by_rev_data,  x='time_period',
+                  y='total_revenue', color='state_name',
+                  markers=True, title=f'Revenue Growth Trend For Top {n} States')
+
+    fig.update_layout(xaxis_title='Date', yaxis_title='Growth In Revenue')
+    fig.update_legends(title='States')
+    
+    # Return the result as a tuple:
+    return (top_n_states_by_rev_data, fig)
+
+
+
+
+# ------------------------------------------------------------------------------------------------------------
+# 6. A line chart to display the growth in order volume for top `n` states over the time, where, n is the given parameters:
+# ------------------------------------------------------------------------------------------------------------
+
+def plot_growth_order_vol_over_time(df, n):
+    """
+    This function takes n as a parameter, where n is the total number of top order-volume generating states and plots a line chart
+    to display the growth in the order volume over the time and also returns the top n states as a dataframe along with the other details
+
+    Parameters:
+    ------------
+    df: a dataframe where orders and revenue are aggregated at the month level for each state
+    n: total number of top leading states by the revenue
+
+    Returns:
+    --------
+    A tuple of: (top_n_states_by_order_volume, fig)
+
+    """
+
+    total_ordrs_and_revn_by_time_period = df
+
+     # Aggregate the sum of total orders by the state to find the highest order volume generator to be selected for the line plot:
+    top_n_states_by_orders = (total_ordrs_and_revn_by_time_period.groupby(by='state')['total_orders'].sum()
+                              .sort_values(ascending=False).head(int(f"{n}")).index)
+    
+
+    # Select only the top n state informations based on the provided paramter n:
+    top_n_states_by_orders_data = (total_ordrs_and_revn_by_time_period[total_ordrs_and_revn_by_time_period['state']
+                                     .isin(top_n_states_by_orders)].drop(columns=['total_revenue']))
+    
+
+
+    # plot a line chart where the number of line is determined by the parameter n:
+    fig = px.line(data_frame=top_n_states_by_orders_data,
+                  x='time_period',
+                  y='total_orders',
+                  color='state_name',
+                  title=f'Order Growth Trend For Top {n} States',
+                  markers=True)
+
+    fig.update_layout(xaxis_title='Date', yaxis_title='Growth In Orders')
+    fig.update_legends(title='States')
+    
+    
+    # Return the result as a tuple:
+    return (top_n_states_by_orders_data, fig)
