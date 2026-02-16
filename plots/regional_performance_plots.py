@@ -57,6 +57,13 @@ def plot_total_rev_per_state(df):
                      "x": 0.5,
                      "xanchor": "center"
                  })
+    fig.add_annotation(
+                        x=1.45, y="São Paulo",
+                        text="High volume, lower AOV",
+                        showarrow=True,
+                        arrowhead=2
+                        )
+
 
     return fig
 
