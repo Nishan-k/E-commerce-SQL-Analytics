@@ -157,10 +157,11 @@ def plot_aov_wrt_revenue_and_order_vol(df):
         hovertemplate="<b>%{y}</b><br>" +
                     "AOV Index: %{x:.2f}x<br>" +
                     "Revenue Contribution: %{customdata[0]:.2f}%<br>" +
-                    "Order Volume: %{customdata[1]:,}<br>" +
+                    "Order Contribution: %{customdata[1]:,}%<br>" +
                     "Total Revenue: R$ %{customdata[2]:,.2f}<br>" +
+                    "Total Ordered Volume: %{customdata[3]:,.2f}<br>" +
                     "<extra></extra>",
-        customdata=df_sorted[['revenue_contribution (%)', 'order_volume', 'total_revenue']]
+        customdata=df_sorted[['revenue_contribution (%)', 'order_volume_contribution (%)', 'total_revenue', 'order_volume']]
     ))
 
 

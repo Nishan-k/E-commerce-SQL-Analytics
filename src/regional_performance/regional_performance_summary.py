@@ -39,7 +39,7 @@ visualize the geographic revenue distribution using a choropleth map, where colo
 
 
 # ------------------------------------------------------------------------------------
-# 1. Order-Volume Per State: Summary
+# 2. Order-Volume Per State: Summary
 # ------------------------------------------------------------------------------------
 def get_order_volume_per_state_summary(total_states, highest_order_volume, lowest_order_volume, plot):
      
@@ -56,7 +56,7 @@ geographic order volume distribution via choropleth map, where the color intensi
 the volume of orders made.
 <br>
 
-## Key Insights:
+### Key Insights:
 - `{highest_order_volume['state_names'].iloc[0]}` has **the highest volume for orders** and is also **the highest
 revenue generating state**.
 
@@ -75,3 +75,49 @@ identification of states where the most of the revenue for the company lies in:
      plot.show()
 
      
+# ------------------------------------------------------------------------------------
+# 3. High-Revenue States: Volume vs. Average Order Value (AOV): Summary
+# ------------------------------------------------------------------------------------
+
+def get_order_aov_relation_w_revenue(max_val, min_val, plot):
+     """
+     Returns a summary for High-Revenue States: Volume vs. Average Order Value (AOV) section:
+     """
+
+     plt_aov_wrt_reve_and_order_vol = plot 
+
+     display(Markdown(f""" ## Summary: High-Revenue States: Volume vs. Average Order Value (AOV)
+<hr>
+
+### Objective:
+Determine whether high-revenue states are driven by higher order volume or higher average order value (AOV).
+
+
+### Key Insights:
+- `{max_val['state_names'].iloc[0]}` state has the highest AOV of <b>{max_val['aov_index'].iloc[0]:.2f}%</b>
+but is the lowest revenue generating state, contributing <b>{max_val['revenue_contribution (%)'].iloc[0]:.2f}%</b> in the 
+total revenue, with the lowest number of orders contribution <b>{max_val['order_volume_contribution (%)'].iloc[0]:.2f}%</b>
+in the total order-volume.
+
+- `{min_val['state_names'].iloc[0]}` state has the lowest AOV of <b>{min_val['aov_index'].iloc[0]:.2f}%</b>
+but is the highest revenue generating state, with a contribution of <b>{min_val['revenue_contribution (%)'].iloc[0]:.2f}%</b>, 
+in the total revenue, with the highest number of orders contribution 
+<b>{min_val['order_volume_contribution (%)'].iloc[0]:.2f}%</b>, in the total order-volume.
+
+- **AOV** and **Order volume** shows an `inverse relationship`, several states exhibit high **AOV** but **low order volume**,
+indicating premium but niche markets.
+- **Revenue** for the company is driven by the **volume of orders.**
+
+> ### Business Implication:
+States with high volume orders benefit more from **scale optimization**, while states with high **AOV** can derive better
+results with targeted offerings to their VIP customers.
+<hr>
+
+A chart below represents the relation of the **`revenue`** with respect to **`the order volume and AOV`**:
+
+
+"""))
+
+     plt_aov_wrt_reve_and_order_vol.show()
+
+
