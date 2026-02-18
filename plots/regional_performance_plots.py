@@ -236,13 +236,16 @@ def plot_growth_rev_over_time(df, n):
 
     """
     total_ordrs_and_revn_by_time_period = df
-    # Aggregate the sum of total revenue by the state to find the highest revenue earners to be selected for the line plot:
-    top_n_states_by_rev = (total_ordrs_and_revn_by_time_period.groupby(by=['state'])
-                        ['total_revenue'].sum().sort_values(ascending=False).head(int(f"{n}")).index)
+     # Aggregate the sum of total orders by the state to find the highest order volume generator to be selected for the line plot:
+    top_n_states_by_rev_data_agg = (total_ordrs_and_revn_by_time_period.groupby(by=['state_name'])
+                                        .agg(total_revenue = ('total_revenue', 'sum'))
+                                        .reset_index().sort_values(by='total_revenue', ascending=False)).head(n)
+    
+    state_names = top_n_states_by_rev_data_agg['state_name'].to_list()
     
     # Select only the top n state informations based on the provided paramter n:
-    top_n_states_by_rev_data = (total_ordrs_and_revn_by_time_period[total_ordrs_and_revn_by_time_period['state']
-                                                              .isin(top_n_states_by_rev)].drop(columns=['total_orders']))
+    top_n_states_by_rev_data = (total_ordrs_and_revn_by_time_period[total_ordrs_and_revn_by_time_period['state_name']
+                                                              .isin(state_names)].drop(columns=['total_orders']))
     
     # plot a line chart where the number of line is determined by the parameter n:
     fig = px.line(data_frame=top_n_states_by_rev_data,  x='time_period',
@@ -253,7 +256,7 @@ def plot_growth_rev_over_time(df, n):
     fig.update_legends(title='States')
     
     # Return the result as a tuple:
-    return (top_n_states_by_rev_data, fig)
+    return (top_n_states_by_rev_data_agg, fig)
 
 
 
@@ -281,16 +284,18 @@ def plot_growth_order_vol_over_time(df, n):
     total_ordrs_and_revn_by_time_period = df
 
      # Aggregate the sum of total orders by the state to find the highest order volume generator to be selected for the line plot:
-    top_n_states_by_orders = (total_ordrs_and_revn_by_time_period.groupby(by='state')['total_orders'].sum()
-                              .sort_values(ascending=False).head(int(f"{n}")).index)
+    
+    top_n_states_by_orders_data_agg = (total_ordrs_and_revn_by_time_period.groupby(by=['state_name'])
+                                        .agg(total_orders = ('total_orders', 'sum'))
+                                        .reset_index().sort_values(by='total_orders', ascending=False)).head(n)
+    
+    state_names = top_n_states_by_orders_data_agg['state_name'].to_list()
     
 
     # Select only the top n state informations based on the provided paramter n:
-    top_n_states_by_orders_data = (total_ordrs_and_revn_by_time_period[total_ordrs_and_revn_by_time_period['state']
-                                     .isin(top_n_states_by_orders)].drop(columns=['total_revenue']))
+    top_n_states_by_orders_data = (total_ordrs_and_revn_by_time_period[total_ordrs_and_revn_by_time_period['state_name']
+                                     .isin(state_names)].drop(columns=['total_revenue']))
     
-
-
     # plot a line chart where the number of line is determined by the parameter n:
     fig = px.line(data_frame=top_n_states_by_orders_data,
                   x='time_period',
@@ -304,4 +309,4 @@ def plot_growth_order_vol_over_time(df, n):
     
     
     # Return the result as a tuple:
-    return (top_n_states_by_orders_data, fig)
+    return (top_n_states_by_orders_data_agg, fig)

@@ -79,7 +79,7 @@ identification of states where the most of the revenue for the company lies in:
 # 3. High-Revenue States: Volume vs. Average Order Value (AOV): Summary
 # ------------------------------------------------------------------------------------
 
-def get_order_aov_relation_w_revenue(max_val, min_val, plot):
+def get_order_aov_relation_w_revenue_summary(max_val, min_val, plot):
      """
      Returns a summary for High-Revenue States: Volume vs. Average Order Value (AOV) section:
      """
@@ -121,3 +121,49 @@ A chart below represents the relation of the **`revenue`** with respect to **`th
      plt_aov_wrt_reve_and_order_vol.show()
 
 
+
+
+# ------------------------------------------------------------------------------------
+# 3.Regional Growth (Revenue & Order) Over Time: Summary
+# ------------------------------------------------------------------------------------
+
+def get_regional_growth_revenue_and_order_over_time_summary(top_n_states_by_orders_data_agg, top_n_states_by_rev_data_agg,
+                                                            order_fig, revenue_fig):
+     """
+     Returns the summary for Regional Growth (Revenue & Order) Over Time section:
+     """
+  
+     display(Markdown(f""" ## Summary: Regional Growth (Revenue & Order) Over Time
+<hr>
+
+### Objective: 
+Analyze regional growth trends over time to understand how revenue and order volume evolve together and 
+identify states driving sustained business growth.
+
+
+### Key Insights:
+- Revenue and order volume exhibit **nearly identical growth patterns**, indicating that **revenue growth is primarily 
+driven by increasing order volume rather than price effects**.
+- `{top_n_states_by_orders_data_agg['state_name'].iloc[0]}` consistently leads across time with the **highest order 
+volume of {top_n_states_by_orders_data_agg['total_orders'].iloc[0]:,.2f}** and shows the **steepest growth trajectory**, 
+significantly outperforming other states.
+- `{top_n_states_by_rev_data_agg['state_name'].iloc[0]}` is also the **highest revenue-generating state 
+of $R{top_n_states_by_rev_data_agg['total_revenue'].iloc[0]:,.2f}**, reinforcing its role as the primary 
+growth engine for the business.
+> ### Business Implicaton:
+`{top_n_states_by_orders_data_agg['state_name'].iloc[0]}` represents the company’s most critical market 
+from both **volume and revenue perspectives**. The strong and consistent performance of southeastern states 
+suggests that operational efficiency, logistics maturity, and customer density may be key growth drivers.  
+The company could **experiment with replicating successful operational and marketing strategies from these 
+top-performing states** in other high-potential regions through controlled `A/B testing` to assess scalability.
+
+<hr>
+"""))
+     order_fig.show()
+     revenue_fig.show()
+
+     
+
+
+     
+ 
