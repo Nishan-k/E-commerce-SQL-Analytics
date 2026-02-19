@@ -1,5 +1,5 @@
 @REM Convert notebook to HTML and save in html_files folder
-jupyter nbconvert --to html "04_Regional_Performance_with_Growth_Trends.ipynb" --output-dir "../docs"
+jupyter nbconvert --to html "02_Revenue Leakage Analysis.ipynb" --output-dir "../docs"
 
 
 @REM Go to the root of the project to git add everything
