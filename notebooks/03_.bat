@@ -6,4 +6,4 @@ jupyter nbconvert --to html "03_Customer Segmentation (RFM Analysis).ipynb" --ou
 cd ..
 git add .
 git commit -m "Update notebook as .html"
-git push origin maincls
+git push origin main

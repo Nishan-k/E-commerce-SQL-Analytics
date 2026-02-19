@@ -6,4 +6,4 @@ jupyter nbconvert --to html "02_Revenue Leakage Analysis.ipynb" --output-dir "..
 cd ..
 git add .
 git commit -m "Update notebook as .html"
-git push origin maincls
+git push origin main

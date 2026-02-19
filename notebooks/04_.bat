@@ -6,4 +6,4 @@ jupyter nbconvert --to html "04_Regional_Performance_with_Growth_Trends.ipynb" -
 cd ..
 git add .
 git commit -m "Update notebook as .html"
-git push origin maincls
+git push origin main
