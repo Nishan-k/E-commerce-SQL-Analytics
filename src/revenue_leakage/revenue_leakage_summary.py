@@ -104,13 +104,9 @@ def category_level_revenue_leakage_summary(revenue_lost_per_prodct_cat, prod_cat
                                            cancelled_orders, revenue_leakage_percentage, cancelled_orders_with_items_val,
                                            cancelled_orders_without_items_val,
                                            fig):
+   
     
-    revenue_lost_per_prodct_cat_html = revenue_lost_per_prodct_cat.to_html(index=False)
-    prod_cat_w_max_amount_html = prod_cat_w_max_amount.to_html(index=False)
-    prod_cat_w_min_amount_html = prod_cat_w_min_amount.to_html(index=False)
-    
-    display(Markdown(f""" 
-## Category-Level Revenue Leakage: Summary:
+   display(Markdown(f""" ## Category-Level Revenue Leakage: Summary:
                      
 {"--" * 50}
     
@@ -126,20 +122,18 @@ placed an order but due to certain scenarios like **payment failure or app crash
 `order_id` resulting in the creation of `order_id` in the `orders` table only.
 
 
-The table below lists the **product categories** whose orders were canceled and are displayed in
+The table below lists the top 10 **product categories** whose orders were canceled and are displayed in
 descending order w.r.t `total_amount`, where, the table consists
-of `product_category`, `total_amount`, and `revenue_leak_percentage`"""), HTML(revenue_lost_per_prodct_cat_html))
+of `product_category`, `total_amount`, and `revenue_leak_percentage`"""), revenue_lost_per_prodct_cat.head(10))
+   
+
+   display(Markdown(f""" Where, the **maxiumum** values was: """), prod_cat_w_max_amount)   
+   display(Markdown(f""" and the the **minimum** values was: """), prod_cat_w_min_amount)
+   display(Markdown(f"""To get the better idea, the chart below plots the top 10 `product_categories`, based
+        on their contribution in the total revenue leakage:"""))
+   fig.show()
     
-    
-    display(Markdown(f""" Where, the **maxiumum** values was: """), HTML(prod_cat_w_max_amount_html))
-    display(Markdown(f""" and the the **minimum** values was: """), HTML(prod_cat_w_min_amount_html))
-    
-    
-    display(Markdown(f"""To get the better idea, the chart below plots the top 10 `product_categories`, based
-    on their contribution in the total revenue leakage:"""))
-    display(fig)
-    fig.write_image("../plot_images/Top_10_Product_Categories_by_Revenue_Loss.png", width=1200, height=600, scale=2)
-    display(Image(filename="../plot_images/Top_10_Product_Categories_by_Revenue_Loss.png"))
+
 
 
 
@@ -168,10 +162,9 @@ The scatter plot below visualizes this relationship:
 - Color intensity (red scale) represents the magnitude of revenue loss
 """))
 
-    display(fig)
+    fig.show()
 
-    fig.write_image("../plot_images/High_revenue_loss_despite_low_cancellations.png", scale=2, width=1200, height=600)
-    display(Image(filename="../plot_images/High_revenue_loss_despite_low_cancellations.png"))
+   
 
     display(Markdown(f"""
 ## Hypothesis Evaluation:

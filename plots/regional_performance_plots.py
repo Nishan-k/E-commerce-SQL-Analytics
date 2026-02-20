@@ -1,11 +1,7 @@
-import chart_studio.plotly as py
 import plotly.express as px
 import plotly.graph_objects as go
-import cufflinks as cf
-import matplotlib.pyplot as plt
-import numpy as np
 import requests
-
+import pandas as pd
 
 
 # We are pulling the brazil-states.geojson file for mapping the states in the chart:

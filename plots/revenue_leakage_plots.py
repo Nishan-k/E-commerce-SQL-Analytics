@@ -1,8 +1,5 @@
-import chart_studio.plotly as py
 import plotly.express as px
 import plotly.graph_objects as go
-import cufflinks as cf
-import matplotlib.pyplot as plt
 import pandas as pd
 
 
@@ -37,7 +34,7 @@ def plot_top_10_product_categories_by_revenue_loss(top_10_canceled_prod_category
     
     fig.update_traces(texttemplate = "%{text:.2f}", 
                       textposition = "outside")
-    
+    fig.write_html("../plot_html/Top_10_Product_Categories_by_Revenue_Loss.html")
     return fig
 
 
@@ -94,4 +91,5 @@ def plot_cancelation_volume_vs_revenue_loss(cncl_count_and_amount_by_prd_cat: pd
         ay=-40
     )
 
+    fig.write_html("../plot_html/Cancellation_Volume_vs_Revenue_Loss.html")
     return fig
