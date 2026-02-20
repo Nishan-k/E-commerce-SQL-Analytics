@@ -16850,10 +16850,10 @@ if (outputEl) {{
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[42]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">number_of_cancellations_by_product_category</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">number_of_cancellations_by_product_category</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -16871,7 +16871,7 @@ if (outputEl) {{
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[28]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[42]:</div>
 
 
 
@@ -16908,6 +16908,140 @@ if (outputEl) {{
       <th>1</th>
       <td>housewares</td>
       <td>49</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>computers_accessories</td>
+      <td>46</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>health_beauty</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>furniture_decor</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>toys</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>auto</td>
+      <td>30</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[45]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There are a total of </span><span class="si">{</span><span class="n">number_of_cancellations_by_product_category</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> unique product categories.&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>There are a total of 47 unique product categories.
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[41]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">number_of_cancellations_by_product_category</span><span class="p">[</span><span class="n">number_of_cancellations_by_product_category</span><span class="p">[</span><span class="s1">&#39;product_category&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;cool_stuff&#39;</span><span class="p">]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[41]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>product_category</th>
+      <th>total_n_orders</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>12</th>
+      <td>cool_stuff</td>
+      <td>16</td>
     </tr>
   </tbody>
 </table>
@@ -17309,8 +17443,59 @@ when addressing revenue leakage.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><a id='key-findings--business-interpretation'></a></p>
-<h2 id="4.-Key-Findings-&amp;-Business-Interpretation:">4. Key Findings &amp; Business Interpretation:<a class="anchor-link" href="#4.-Key-Findings-&amp;-Business-Interpretation:">&#182;</a></h2>
+<h2 id="4.-Key-Findings-&amp;-Business-Interpretation:">4. Key Findings &amp; Business Interpretation:<a class="anchor-link" href="#4.-Key-Findings-&amp;-Business-Interpretation:">&#182;</a></h2><h3 id="Analysis-Overview">Analysis Overview<a class="anchor-link" href="#Analysis-Overview">&#182;</a></h3><p>This analysis evaluates potential revenue leakage by comparing the company’s <code>total market opportunity</code> with <code>realized revenue</code> and <code>identifying losses caused by order cancellations.</code> The objective is to quantify the magnitude of revenue leakage, assess whether it represents a business risk, and determine whether revenue loss is driven primarily by cancellation volume or by high-value products with fewer cancellations.</p>
+<hr>
+<h3 id="Key-Findings">Key Findings<a class="anchor-link" href="#Key-Findings">&#182;</a></h3><p><strong>1. Revenue Leakage Is Currently Low</strong>
+The company shows a relatively low level of revenue leakage. Out of a total market opportunity of <strong>R\$ 15.8M</strong>, the company has realized <strong>R\$ 15.42M</strong>, resulting in a revenue leakage of <strong>R\$ 0.11M (0.69%)</strong>. This indicates efficient order fulfillment and a minimal gap between expected and realized revenue.</p>
+<p><strong>2. Order Fulfillment Efficiency Drives Revenue Realization</strong>
+Out of <strong>99,441 total orders</strong>, the majority have been successfully delivered, indicating strong operational performance:</p>
+<ul>
+<li><code>Delivered: 96,478</code></li>
+<li><code>Shipped: 1,107</code>  </li>
+<li><code>Cancelled: 625</code>  </li>
+<li><code>Unavailable: 609</code>  </li>
+<li><code>Invoiced: 314</code>  </li>
+<li><code>Processing: 301</code>  </li>
+<li><code>Created / Approved: 7</code>  </li>
+</ul>
+<p>Among the <strong>625 cancelled orders</strong>, cancellations can be further split into:</p>
+<ul>
+<li>Cancelled orders with items: <strong>461</strong></li>
+<li>Cancelled orders without items: <strong>164</strong>  </li>
+</ul>
+<p>This breakdown confirms that most cancellations involve products and therefore have direct revenue impact.</p>
+<p><strong>3. Revenue Leakage Is Concentrated in a Small Set of Product Categories</strong>
+Despite the overall low leakage, revenue loss is not evenly distributed across product categories. Out of <strong>47 product categories</strong>, just <strong>6 categories account for approximately 50% of total revenue leakage</strong>:</p>
+<ul>
+<li><code>cool_stuff (14.31%)</code></li>
+<li><code>sports_leisure (8.88%)</code></li>
+<li><code>computers_accessories (7.86%)</code></li>
+<li><code>watches_gifts (6.84%)</code></li>
+<li><code>auto (6.35%)</code></li>
+<li><code>housewares (6.00%)</code></li>
+</ul>
+<p>This concentration suggests targeted opportunities for monitoring and mitigation.</p>
+<p><strong>4. Revenue Leakage Is Not Driven Solely by Cancellation Volume</strong>
+Revenue leakage is influenced more by product value than by the sheer number of cancellations. For example, <code>cool_stuff</code> contributes the highest revenue leakage (<strong>R$ 15,153.48; 14.31%</strong>) despite ranking only <strong>13th</strong> in cancellation count (<strong>16</strong> cancelled orders). In contrast, <code>sports_leisure</code> has the highest number of cancellations (<strong>51</strong>) but a lower revenue leakage percentage (<strong>8.88%</strong>). This indicates that high-value products can generate disproportionate revenue loss even with relatively few cancellations.</p>
+<hr>
+<h3 id="Business-Interpretation">Business Interpretation<a class="anchor-link" href="#Business-Interpretation">&#182;</a></h3><ul>
+<li>Overall revenue leakage is below <strong>1%</strong>, suggesting that order fulfillment processes are operating effectively and do not currently pose a business risk.</li>
+<li>Revenue loss is concentrated in a small number of high-value product categories rather than driven by high cancellation volume alone.</li>
+<li>If mitigation efforts are pursued, prioritizing high-value categories such as <code>cool_stuff</code> may help prevent disproportionate revenue impact from future cancellations.</li>
+</ul>
+
 </div>
 </div>
 </div>
