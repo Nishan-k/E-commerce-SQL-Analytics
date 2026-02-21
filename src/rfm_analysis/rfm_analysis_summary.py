@@ -42,8 +42,7 @@ The chart below visualizes the distribution of customers across recency bins, hi
 declines as time since last purchase increases:
 """))
     fig.show()
-    fig.write_image("../plot_images/Customers_Distribution_By_Recency.png", width=1200, height=600, scale=2)
-    display(Image(filename="../plot_images/Customers_Distribution_By_Recency.png"))
+    
 
 
 
@@ -99,8 +98,7 @@ This approach prevents one-time buyers from visually overwhelming the chart and 
 between smaller yet valuable customer segments."""))
 
     fig.show()
-    fig.write_image("../plot_images/Customer_Segmentation_by_Purchase_Frequency.png", width=1200, height=600, scale=2)
-    display(Image(filename="../plot_images/Customer_Segmentation_by_Purchase_Frequency.png"))
+    
         
     display(Markdown("""
 Overall, the Frequency analysis reveals that the business is highly dependent on **first-time buyers**, highlighting a significant opportunity for:
@@ -142,8 +140,7 @@ In this analysis:
         
     display(Markdown("The chart below displays the comparison between the <b>Volume</b> and <b>Value</b>"))
     fig.show()
-    fig.write_image("../plot_images/Revenue_contribution_volume_vs_value.png", width=1200, height=600, scale=2)
-    display(Image(filename="../plot_images/Revenue_contribution_volume_vs_value.png"))
+    
 
 
 

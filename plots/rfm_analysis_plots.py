@@ -21,6 +21,7 @@ def plot_customer_distribution_recency_bar_chart(df):
              text=customers_per_bins_labeled_df['Total Customers'],
              title = 'Customers Distribution By Recency')
     
+    fig.write_html("../plot_html/Customers_Distribution_By_Recency.html")
     return fig
 
 
@@ -44,6 +45,7 @@ def plot_customer_purchase_frequency_bar_chart(df):
 
     fig.update_traces(texttemplate='%{text:.2f}%', textposition='outside')
     fig.update_yaxes(type='log')
+    fig.write_html("../plot_html/Customer_Segmentation_by_Purchase_Frequency.html")
     return fig
 
 
@@ -152,6 +154,7 @@ def plot_volume_vs_value_chart(df):
         "<b>Revenue Contribution (%):</b> %{customdata[1]:,.2f}%<br>"+
         "<extra></extra>"
     )
-    
+
+    fig.write_html("../plot_html/Revenue_contribution_vol_val.html")
     return fig
 
