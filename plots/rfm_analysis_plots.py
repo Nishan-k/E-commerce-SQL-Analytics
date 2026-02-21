@@ -16,10 +16,20 @@ def plot_customer_distribution_recency_bar_chart(df):
     This function is responsible to plot a bar chart that shows the customer distribution by recency days interval where each bin represents an interval of 50 days:
     """
     customers_per_bins_labeled_df = df
-    fig = px.bar(x=customers_per_bins_labeled_df['Days Interval'], y=customers_per_bins_labeled_df['Total Customers'],
-             labels={'x': 'Recency Bins (Days)', 'y': 'Number Of Customers'},
-             text=customers_per_bins_labeled_df['Total Customers'],
-             title = 'Customers Distribution By Recency')
+    fig = px.bar(
+        data_frame=customers_per_bins_labeled_df,
+        x= 'Days Interval',
+        y= 'Total Customers',
+        labels={'x': 'Recency Bins (Days)', 
+                'y': 'Number Of Customers'},
+        title = 'Customers Distribution By Recency'
+        )
+    
+    fig.update_traces(hovertemplate=
+                      "<b>Numer of customers:</b> %{y}<br>" +
+                      "<b>Recency Bin: </b> %{x}<br>" +
+                      "<extra></extra>"
+                      )
     
     fig.write_html("../plot_html/Customers_Distribution_By_Recency.html")
     return fig

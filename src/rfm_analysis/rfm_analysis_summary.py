@@ -8,13 +8,25 @@ from IPython.display import display, Markdown, Image, HTML
 
 
 def get_revenue_analysis_summary(recency_table_full, customers_per_bins_labeled_df, fig):
+
     """
     This function is responsible to generate the summary for the R of RFM analysis
     i.e. for revenue analysis and takes positional arguement
     """
-    display(Markdown(f"""
-## Recency Analysis Conclusion:
 
+    display(Markdown(f""" ## Summary: Recency Analysis Per Customer:
+<hr>
+
+### Objective:<br>
+Analyze the number of days as a **gap since the customer's most recent purchase.** Only the orders
+with `delivered` status were considered, the dataset is historical and is old, so a threshold
+date is made as `DATE(MAX(order_purchase_timestamp), '+10 days` i.e. **2018-09-08** to find the difference rather
+than the current date of year **2026** which would distort the analysis . Each customer is recorded once 
+using a `WINDOW FUNCTION` to capture their most recent purchase.
+                                          
+### Key Insights:<br>
+                     
+                     
 Recency measures how long it has been since a customer’s **most recent completed purchase.** 
 
 In this analysis:
@@ -58,7 +70,7 @@ def get_frequency_analysis_summary(customer_order_frequency_interpretation_count
     """
 
     display(Markdown("""
-## Frequency Analysis Conclusion:
+## Frequency Analysis Summary:
 
 Frequency measures **how often a customer makes a complete purchase**.
 
@@ -124,7 +136,7 @@ def get_monetary_analysis_summary(segment_monetary_summary_w_customer_share, fig
     """
 
     display(Markdown(f"""
-## Monetary Analysis Conclusion:
+## Monetary Analysis Summary:
 
 Monetary analysis focuses on understanding **how much revenue customers generate**, not just how often they purchase.
 While Frequency identifies repeat behavior, **Monetary highlights customer value**.
