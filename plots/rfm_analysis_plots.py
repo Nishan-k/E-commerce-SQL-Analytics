@@ -26,7 +26,7 @@ def plot_customer_distribution_recency_bar_chart(df):
         )
     
     fig.update_traces(hovertemplate=
-                      "<b>Numer of customers:</b> %{y}<br>" +
+                      "<b>Numer of customers:</b> %{y:,}<br>" +
                       "<b>Recency Bin: </b> %{x}<br>" +
                       "<extra></extra>"
                       )
