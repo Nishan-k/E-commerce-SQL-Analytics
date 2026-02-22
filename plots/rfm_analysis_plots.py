@@ -48,12 +48,17 @@ def plot_customer_purchase_frequency_bar_chart(df):
              x='Interpretation',
              y='Customer Share (%)',
              text='Customer Share (%)',
-             hover_data={'Total Counts': ':,',
-                         'Customer Share (%)': ':.2f%'},
+             custom_data='Total Counts',
              title='Customer Segmentation by Purchase Frequency',
-             labels={'Interpretation':'Customer Segment', 'Customer Share (%)':'Customer Share Log (%)',
+             labels={'Interpretation':'Customer Segment', 'Customer Share (%)':'Customer Share (%) Log',
                     'Total Counts': 'Total Customers'})
 
+    fig.update_traces(hovertemplate=
+                      "<b>Customer Segment:</b> %{x}<br>" +
+                      "<b>Customer Share: </b> %{y:.2f}%<br>" +
+                      "<b>Total Customers:</b> %{customdata[0]:,}"+
+                      "<extra></extra>"
+                      )
     fig.update_traces(texttemplate='%{text:.2f}%', textposition='outside')
     fig.update_yaxes(type='log')
     fig.write_html("../plot_html/Customer_Segmentation_by_Purchase_Frequency.html")
