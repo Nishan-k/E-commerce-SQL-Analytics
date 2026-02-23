@@ -78,7 +78,7 @@ are grouped into `five frequency-based segments`.
 - `VIP Customers:` 5 or more orders                     
 
 ### Key Insights:
-- The frequency distribution is `heavily right-skewed`, with `One-Time Buyers` dominating the customer base at **96.95% (90,557 customers).**
+- The frequency distribution is `heavily right-skewed`, with `One-Time Buyers` dominating the customer base at **97.00% (90,557 customers).**
 - Returning (**2.756% or 2,573 customers**) and Loyal (**0.194% or 181 customers**) egments are much smaller but represent the early stages of repeat purchasing.              
 - Very Loyal (**0.030% or 28 customers**)  and VIP (**0.020% or 19 customers**)  makeup a very small fraction but are likely to generate higher lifetime value.           
 - Overall, the business relies strongly on `One-Time Buyers`, while repeat purchase behavior is limited across. 
