@@ -65,6 +65,7 @@ revenue generating state**.
 - The `Volume of Order` and `Revenue Generation` has **a linear relationship for these two states**, this relationship
 will be analyzed for other states in the later stage.
 
+<hr>
 
 > The choropleth visualization below highlights strong geographic order-volume concentration, enabling quick 
 identification of states where the most of the revenue for the company lies in:
