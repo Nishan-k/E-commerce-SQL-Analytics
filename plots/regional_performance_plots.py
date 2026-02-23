@@ -200,7 +200,7 @@ def plot_aov_wrt_revenue_and_order_vol(df):
     fig.update_layout(
     autosize=True,
     height=650,
-    width=1200,
+    width=1150,
     margin=dict(l=30, r=30, t=80, b=30)
     )
     
