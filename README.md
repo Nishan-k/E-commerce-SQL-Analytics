@@ -101,6 +101,7 @@ A total of **(461=+164) = 625 cancelled orders**, where `with-items` cancelation
 <h3 id='rfm'> 3.2 Customer Segmentation (RFM Analysis): </h3> 
 <a href='https://nishan-k.github.io/E-commerce-SQL-Analytics/03_Customer_Segmentation_(RFM%20Analysis).html'> Open Notebook🔗 </a>
 
+<hr>
 
 <h4> a. What is the current situation of the recency period?</h4>
 
@@ -144,6 +145,7 @@ A total of **(461=+164) = 625 cancelled orders**, where `with-items` cancelation
 <h3 id='growth'> 3.3 Regional Performance With Growth Trends: </h3> 
 <a href='https://nishan-k.github.io/E-commerce-SQL-Analytics/04_Regional_Performance_with_Growth_Trends.html'> Open Notebook🔗 </a>
 
+<hr>
 
 <h4> a. How is revenue distributed across states?</h4>
 
@@ -182,30 +184,42 @@ The `Volume of Order and Revenue Generation` has a linear relationship for major
 
 
 
+<h2 id="tech">4. Tech Stack</h2>
+
+- Programming and analysis:
+    - Python (Pandas, NumPy)
+    - SQL (JOINS, AGGREGATION, WINDOW FUNCTIONS)
+
+- Data visualization:
+    - Plotly (interactive charts)
+    - Matplotlib
+
+- Environment and tools:
+    - Anaconda (virtual environment)
+    - Jupyter Notebook
+    - GitHub (version control and project hosting)
+
+
+
+<h2 id="structure">5. Project Structure</h2>
+ <hr>
+
+
 
 ```
-├───.ipynb_checkpoints
-├───data                         
-│   └───raw
-├───docs                         
-├───notebooks
-│   └───.ipynb_checkpoints
-├───plots                       
-│   └───__pycache__
-├───plot_html
-├───sql
-│   ├───.ipynb_checkpoints
-│   ├───02_Revenue_Leakage_Analysis
-│   ├───03_Customer_Segmentation_(RFM_Analysis)
-│   └───04_Regional_Performance_with_Growth_Trends
-├───src
-│   ├───regional_performance
-│   │   └───__pycache__
-│   ├───revenue_leakage
-│   │   └───__pycache__
-│   ├───rfm_analysis
-│   │   └───__pycache__
-│   └───__pycache__
-└───utils
-    └───__pycache__
+├── data/  
+│   └── raw/                  # Raw CSV files used to create the e-commerce database  
+├── docs/                     # Exported HTML notebooks for GitHub viewing  
+├── notebooks/                # Jupyter notebooks with analysis, interactive visuals, and insights  
+├── plots/                    # Reusable Python functions for Plotly visualizations  
+├── plot_html/                # Interactive Plotly charts saved as HTML  
+├── sql/                      # SQL queries used for metric calculations  
+│   ├── 02_Revenue_Leakage_Analysis/  
+│   ├── 03_Customer_Segmentation_(RFM_Analysis)/  
+│   └── 04_Regional_Performance_with_Growth_Trends/  
+├── src/                      # Python modules executing SQL and computing metrics  
+│   ├── revenue_leakage/  
+│   ├── rfm_analysis/  
+│   └── regional_performance/  
+└── utils/                    # Helper and utility functions
 ```    
