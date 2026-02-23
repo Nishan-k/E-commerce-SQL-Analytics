@@ -95,12 +95,12 @@ Determine whether high-revenue states are driven by higher order volume or highe
 
 
 ### Key Insights:
-- `{max_val['state_names'].iloc[0]}` state has the highest AOV of <b>{max_val['aov_index'].iloc[0]:.2f}%</b>
+- `{max_val['state_names'].iloc[0]}` state has the highest AOV of <b>{max_val['aov_index'].iloc[0]:.2f}x</b>
 but is the lowest revenue generating state, contributing <b>{max_val['revenue_contribution (%)'].iloc[0]:.2f}%</b> in the 
 total revenue, with the lowest number of orders contribution <b>{max_val['order_volume_contribution (%)'].iloc[0]:.2f}%</b>
 in the total order-volume.
 
-- `{min_val['state_names'].iloc[0]}` state has the lowest AOV of <b>{min_val['aov_index'].iloc[0]:.2f}%</b>
+- `{min_val['state_names'].iloc[0]}` state has the lowest AOV of <b>{min_val['aov_index'].iloc[0]:.2f}x</b>
 but is the highest revenue generating state, with a contribution of <b>{min_val['revenue_contribution (%)'].iloc[0]:.2f}%</b>, 
 in the total revenue, with the highest number of orders contribution 
 <b>{min_val['order_volume_contribution (%)'].iloc[0]:.2f}%</b>, in the total order-volume.
