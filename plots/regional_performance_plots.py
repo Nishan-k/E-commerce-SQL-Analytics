@@ -199,8 +199,8 @@ def plot_aov_wrt_revenue_and_order_vol(df):
     fig.update_yaxes(ticklabelstandoff=14)
     fig.update_layout(
     autosize=True,
-    height=850,
-    width=1420,
+    height=650,
+    width=1200,
     margin=dict(l=30, r=30, t=80, b=30)
     )
     
