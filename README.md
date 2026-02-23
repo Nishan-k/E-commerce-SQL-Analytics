@@ -39,7 +39,8 @@ The image below represents the schema for the database:
 
 <h2 id="questions">3. Business Questions Covered</h2>
 
-<h3>NOTE:</h3> Charts are built using <b>Plotly</b> and GitHub doesn't render interactive charts Each section includes a link, click title to view the full notebook with an interactive charts in a new tab,
+<h3>NOTE:</h3> Charts are built using <b>Plotly</b> and GitHub doesn't render interactive charts Each section includes a link, click the link
+stated as <b> Open Notebook🔗</b> to view the full notebook with an interactive charts in a new tab with an option below:
 
 (`Ctrl+Click` / `Cmd+Click`)
 
