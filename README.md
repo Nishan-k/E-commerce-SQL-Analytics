@@ -1,4 +1,5 @@
 # E-commerce Customer & Revenue Analysis Using SQL and Python
+<p>Analyzing customer behavior and revenue patterns to uncover business insights and growth opportunities in a Brazilian e-commerce marketplace.</P>
 
 ![e-commerce image](images/image.png)
 <br>
@@ -8,17 +9,42 @@
 *Image Source: [Google Images](https://retalon.com/thought-leadership/translate-data-into-action)* <br>
 *Date Source: [Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)*
 
-## Table Of Contents
+ <h2>Table Of Contents </h2>
 
 <ol>
-<li><a href="#Overview"><b> Project Overview </a></b></li>
-<li><a href="#data"><b> Dataset </a></b></li>
-<li><a href="#questions"><b> Business Questions Covered </a></b></li>
-    <ul> <a href='#revenue_leakage'><b> 3.1 Revenue Leakage </b></a></ul>
-    <ul> <a href='#rfm'><b> 3.2 Customer Segmentation(RFM Analysis) </b></a></ul>
-    <ul> <a href='#growth'><b> 3.3 Regional Performance With Growth Trends </b></a></ul>
-<li><a href="#tech"><b> Tech Stack </a></b></li>
-<li><a href="#structure"><b> Project Structure </a></b></li>
+<li><a href="#Overview"><h3> Project Overview </h3> </a></li>
+<li><a href="#data"><h3> Dataset </h3> </a></li>
+<li><a href="#questions"><h3> Business Questions Covered </h3> </a></li>
+    <ul>
+    <li>
+    <a href="#revenue_leakage"><b> 3.1 Revenue Leakage:</b></a>
+            <ol type="a">
+            <li> What is the company’s current baseline revenue?</li>
+            <li> What is the current level of revenue leakage?</li>
+            <li> What is the current distribution of order statuses across all orders?</li>
+            <li> Are there specific product categories with a high frequency of order cancellations? </li>
+            <li> Is there a relationship between a high number of cancellations and increased revenue loss? </li>
+            </ol>
+    </li>
+    <li>
+    <a href='#rfm'><b> 3.2 Customer Segmentation(RFM Analysis):</b></a>
+            <ol type="a">
+            <li> What is the current customer recency profile? </li>
+            <li> What are the purchasing frequency patterns among customers? </li>
+            <li> Is revenue primarily driven by order volume or by high-value customers? </li>
+            </ol>
+    </li>
+    <li> 
+    <a href='#growth'><b> 3.3 Regional Performance With Growth Trends: </b></a>
+            <ol type="a">
+            <li> How is revenue distributed across states?</li>
+            <li> How is order volume distributed across states?</li>
+            <li>Are high-revenue states driven by higher order volume or higher average order value (AOV)? </li>
+            <li> What is the trend between revenue and order volume over time for top-performing states?</li>
+            </ol>
+    </ul>
+<li><a href="#tech"><h3> Tech Stack </h3> </a></li>
+<li><a href="#structure"><h3> Project Structure  </h3> </a></li>
 </ol>
 
 
@@ -50,7 +76,7 @@ stated as <b> Open Notebook🔗</b> to view the full notebook with an interactiv
 
 <hr>
 
-<h4> a. What is the current baseline revenue for the company?</h4>
+<h4> a. What is the company’s current baseline revenue?</h4>
 
 - Total market opportunity: **R\$15.84M**.
 - Total revenue loss from order cancellation: **R\$0.11M**.
@@ -58,12 +84,12 @@ stated as <b> Open Notebook🔗</b> to view the full notebook with an interactiv
 
 <hr>
 
-<h4> b. What is the current revenue leakage?</h4>
+<h4> b. What is the current level of revenue leakage?</h4>
 - The current revenue leakage is <b> below 1% (0.69%) </b> suggesting an effective order fulfillment and a low order cancellation impact.
 
 <hr>
 
-<h4> c. What is the current status for all the orders made?</h4>
+<h4> c. What is the current distribution of order statuses across all orders?</h4>
 - A total count of 8 order status. They are: <br>
 
 
@@ -80,11 +106,11 @@ There are two layers for the `canceled` orders, `with-items` and `without-items`
 1. Canceled orders **with-items**: 461
 2. Canceled orders **without-items**: 164
 
-A total of **(461=+164) = 625 cancelled orders**, where `with-items` cancelation are deliberate order cancelation from the client which are the `actual revenue leakage` or **Hard loss** case while `without-items` is the scenario where the order process started but failed before item-level data was persisted, so revenue value is unknown or **Soft loss**.
+Out of **625** canceled orders, **461** had items `(hard revenue loss)`, and **164** were canceled before item-level data was recorded `(soft revenue loss)`.
 
 <hr>
 
-<h4> d. Are there any specific product category whose order gets canceled too often?</h4>
+<h4> d. Are there specific product categories with a high frequency of order cancellations?</h4>
 - These are the <b>top 10 product categories</b> in descending order with the <b>total amount lost and their revenue leakage in %</b> whose order gets canceled too often:
 <br>
 <br>
@@ -93,7 +119,7 @@ A total of **(461=+164) = 625 cancelled orders**, where `with-items` cancelation
 
 <hr>
 
-<h4> e. Is there a correlation between high number of cancellation leading to high revenue loss?</h4>
+<h4> e. Is there a relationship between a high number of cancellations and increased revenue loss?</h4>
 
 - All the `product categories` follows a linear relationship where higher cancellations lead to higher revenue loss with just one exception, i.e. `cool_stuff` category, it has the highest revenue loss **R$ 15,153.48** despite low cancellations (**16**), `sports_leisure` faces the highest number of order cancellation of **51** and has a revenue loss of **R$ 9,411.85**.
 
@@ -104,7 +130,7 @@ A total of **(461=+164) = 625 cancelled orders**, where `with-items` cancelation
 
 <hr>
 
-<h4> a. What is the current situation of the recency period?</h4>
+<h4> a. What is the current customer recency profile?</h4>
 
 - On average, customers take approximately **248 days** to place their `second purchase`, indicating a `long repurchase cycle`.
 
@@ -116,7 +142,7 @@ A total of **(461=+164) = 625 cancelled orders**, where `with-items` cancelation
 
 <hr>
 
-<h4> b. What is the buying-frequency pattern among the customers?</h4>
+<h4> b. What are the purchasing frequency patterns among customers?</h4>
 
 - The analysis is done by segmenting the customers into `5 different segements`:
 
@@ -132,7 +158,7 @@ A total of **(461=+164) = 625 cancelled orders**, where `with-items` cancelation
 
 <hr>
 
-<h4> c. Is the revenue driven by the order volume or valuable customers?</h4>
+<h4> c. Is revenue primarily driven by order volume or by high-value customers?</h4>
 
 - Order volume is the **KEY** revenue driver. The companys revenue `heavily relies on the One-Time Buyer`, with a total of **90,557** customers, `a total revenue` of **R$ 14.55 M**, with `an average revenue` of **R$ 160.73** per customer, and a `revenue contribution` of **97.00 %.**
 - The `value of the customer increases as the customer counts for their second purchase starts decreasing`, although, revenue contribution (%) for the rest of the segments except `One-Time Buyer` is **< 2.7%**, value wise, the company earns on an average of **R$ 291.02 to R$ 787.14** per customer in other remaining `4 segments` while the average revenue per customer for `One-Time Buyer` is just **R$ 160.73.**
@@ -157,7 +183,7 @@ A total of **(461=+164) = 625 cancelled orders**, where `with-items` cancelation
 <hr>
 
 
-<h4> b. How is order frequency distributed across states?</h4>
+<h4> b. How is order volume distributed across states?</h4>
 
 - `São Paulo` has the highest volume (**40,519 orders or 42.0%**) for orders and is also the highest revenue generating state.
 
@@ -167,7 +193,7 @@ The `Volume of Order and Revenue Generation` has a linear relationship for major
 
 <hr>
 
-<h4> c. Are high-revenue states  driven by higher order volume or higher average order value (AOV)?</h4>
+<h4> c. Are high-revenue states driven by higher order volume or higher average order value (AOV)?</h4>
 
 - `Paraíba` state has the highest `AOV` of **1.68x** but is the lowest revenue generating state, contributing **0.89%** in the `total revenue`, with the lowest number of orders contribution **0.53%** in the `total order-volume.`
 - `São Paulo` state has the lowest `AOV` of **0.89x** but is the `highest revenue generating state`, with a contribution of **37.44%**, in `the total revenue`, with the highest number of orders contribution **42.00%**, in `the total order-volume.`
@@ -175,7 +201,7 @@ The `Volume of Order and Revenue Generation` has a linear relationship for major
 
 <hr>
 
-<h4> d. What is the trend between revenue and order volume over time for top states?</h4>
+<h4> d. What is the trend between revenue and order volume over time for the top-performing states?</h4>
 
 - Revenue and order volume exhibit nearly identical growth patterns, indicating that `revenue growth is primarily driven by increasing order volume rather than price effects.`
 - `São Paulo` consistently leads across time with `the highest order volume` of **46,448.00** and `shows the steepest growth trajectory, significantly outperforming other states.`
