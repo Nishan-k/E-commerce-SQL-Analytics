@@ -12,8 +12,8 @@
  <h2>Table Of Contents </h2>
 
 <ol>
-<li><a href="#Overview"><h3> Project Overview </h3> </a></li>
-<li><a href="#data"><h3> Dataset </h3> </a></li>
+<li><a href="#Overview"><b> Project Overview </b> </a></li>
+<li><a href="#data"><b> Dataset </b> </a></li>
 <li><a href="#questions"><h3> Business Questions Covered </h3> </a></li>
     <ul>
     <li>
@@ -43,8 +43,8 @@
             <li> What is the trend between revenue and order volume over time for top-performing states?</li>
             </ol>
     </ul>
-<li><a href="#tech"><h3> Tech Stack </h3> </a></li>
-<li><a href="#structure"><h3> Project Structure  </h3> </a></li>
+<li><a href="#tech"><b> Tech Stack </b> </a></li>
+<li><a href="#structure"><b> Project Structure  </b> </a></li>
 </ol>
 
 
