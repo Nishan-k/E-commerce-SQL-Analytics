@@ -14,7 +14,7 @@
 <ol>
 <li><a href="#Overview"><b> Project Overview </b> </a></li>
 <li><a href="#data"><b> Dataset </b> </a></li>
-<li><a href="#questions"><h3> Business Questions Covered </h3> </a></li>
+<li><a href="#questions"><b> Business Questions Covered </b> </a></li>
     <ul>
     <li>
     <a href="#revenue_leakage"><b> 3.1 Revenue Leakage:</b></a>
