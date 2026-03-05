@@ -1,0 +1,258 @@
+<h1>E-commerce Customer &amp; Revenue Analysis Using SQL and Python</h1>
+<p>Analyzing customer behavior and revenue patterns to uncover business insights and growth opportunities in a Brazilian e-commerce marketplace.</P>
+
+<p><img src="images/image.png" alt="e-commerce image">
+<br></p>
+<p>This project analyzes customer behavior and revenue patterns for a Brazilian e-commerce marketplace using historical order data. The goal is to identify key customer segments, understand purchase frequency and recency, and evaluate the drivers of revenue and regional growth. Insights from this analysis highlight opportunities for improving customer retention and long-term business value.</p>
+
+<p><em>Image Source: <a href="https://retalon.com/thought-leadership/translate-data-into-action">Google Images</a></em> <br>
+<em>Date Source: <a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce">Kaggle</a></em></p>
+ <h2>Table Of Contents </h2>
+
+<ol>
+<li><a href="#Overview"><b> Project Overview </b> </a></li>
+<li><a href="#data"><b> Dataset </b> </a></li>
+<li><a href="#questions"><b> Business Questions Covered </b> </a></li>
+    <ul>
+    <li>
+    <a href="#revenue_leakage"><b> 3.1 Revenue Leakage:</b></a>
+            <ol type="a">
+            <li> What is the company’s current baseline revenue?</li>
+            <li> What is the current level of revenue leakage?</li>
+            <li> What is the current distribution of order statuses across all orders?</li>
+            <li> Are there specific product categories with a high frequency of order cancellations? </li>
+            <li> Is there a relationship between a high number of cancellations and increased revenue loss? </li>
+            </ol>
+    </li>
+    <li>
+    <a href='#rfm'><b> 3.2 Customer Segmentation(RFM Analysis):</b></a>
+            <ol type="a">
+            <li> What is the current customer recency profile? </li>
+            <li> What are the purchasing frequency patterns among customers? </li>
+            <li> Is revenue primarily driven by order volume or by high-value customers? </li>
+            </ol>
+    </li>
+    <li> 
+    <a href='#growth'><b> 3.3 Regional Performance With Growth Trends: </b></a>
+            <ol type="a">
+            <li> How is revenue distributed across states?</li>
+            <li> How is order volume distributed across states?</li>
+            <li>Are high-revenue states driven by higher order volume or higher average order value (AOV)? </li>
+            <li> What is the trend between revenue and order volume over time for top-performing states?</li>
+            </ol>
+    </ul>
+<li><a href="#tech"><b> Tech Stack </b> </a></li>
+<li><a href="#structure"><b> Project Structure  </b> </a></li>
+</ol>
+
+
+
+<h2 id="Overview">1. Project Overview</h2>
+<p>This project analyzes the <b>revenue leakage</b>, <b>customer segmentation (RFM)</b> and <b> regional performance with growth trends</b> for a Brazilian e-commerce marketplace using historical order data. The goal is to identify the source of revenue leakage, key customer segments, understand purchase frequency and recency, and evaluate the drivers of revenue and regional growth. Insights from this analysis highlight opportunities for improving customer retention and long-term business value.</p>
+
+
+<h2 id="data">2. Dataset</h2>
+The analysis uses the Olist e-commerce dataset, which includes historical information about customers, orders, payments, products, geo-location, and sellers across Brazil. Only <b>delivered </b> orders were considered for revenue-related analyses to ensure accurate evaluation of realized revenue. <br>
+<br>
+
+<p>The image below represents the schema for the database:
+<img src="images/schema.png" alt="database relation diagram"></p>
+<p><em>Image Source: <a href="https://i.imgur.com/HRhd2Y0.png">Google Images</a></em></p>
+<h2 id="questions">3. Business Questions Covered</h2>
+
+<h3>NOTE:</h3> Charts are built using <b>Plotly</b> and GitHub doesn't render interactive charts Each section includes a link, click the link
+stated as <b> Open Notebook🔗</b> to view the full notebook with an interactive charts in a new tab with an option below:
+
+<p>(<code>Ctrl+Click</code> / <code>Cmd+Click</code>)</p>
+<h3 id='revenue_leakage'> 3.1 Revenue Leakage: </h3> 
+<a href='https://nishan-k.github.io/E-commerce-SQL-Analytics/02_Revenue_Leakage_Analysis.html#baseline-revenue-metrics'> Open Notebook🔗 </a>
+
+<hr>
+
+<h4> a. What is the company’s current baseline revenue?</h4>
+
+<ul>
+<li>Total market opportunity: <strong>R$15.84M</strong>.</li>
+<li>Total revenue loss from order cancellation: <strong>R$0.11M</strong>.</li>
+<li>Total revenue realized: <strong>R$15.42M</strong></li>
+</ul>
+<hr>
+
+<h4> b. What is the current level of revenue leakage?</h4>
+- The current revenue leakage is <b> below 1% (0.69%) </b> suggesting an effective order fulfillment and a low order cancellation impact.
+
+<hr>
+
+<h4> c. What is the current distribution of order statuses across all orders?</h4>
+- A total count of 8 order status. They are: <br>
+
+
+<ul>
+<li><code>delivered</code>: <b> 96,478 </b></li>
+<li><code>shipped</code>:  <b> 1,107 </b></li>
+<li><code>canceled</code>:  <b> 625 </b></li>
+<li><code>unavailable</code>:  <b> 609</b></li>
+<li><code>invoiced</code>:  <b> 314 </b></li>
+<li><code>processing</code>:  <b> 301 </b></li>
+<li><code>created</code>:  <b> 5 </b></li>
+<li><code>approved</code>:  <b> 2 </b></li>
+</ul>
+<p>There are two layers for the <code>canceled</code> orders, <code>with-items</code> and <code>without-items</code>.</p>
+<ol>
+<li>Canceled orders <strong>with-items</strong>: 461</li>
+<li>Canceled orders <strong>without-items</strong>: 164</li>
+</ol>
+<p>Out of <strong>625</strong> canceled orders, <strong>461</strong> had items <code>(hard revenue loss)</code>, and <strong>164</strong> were canceled before item-level data was recorded <code>(soft revenue loss)</code>.</p>
+<hr>
+
+<h4> d. Are there specific product categories with a high frequency of order cancellations?</h4>
+- These are the <b>top 10 product categories</b> in descending order with the <b>total amount lost and their revenue leakage in %</b> whose order gets canceled too often:
+<br>
+<br>
+
+<p><img src="images/prod_cncl.png" alt="Top 10 canceled products"></p>
+<hr>
+
+<h4> e. Is there a relationship between a high number of cancellations and increased revenue loss?</h4>
+
+<ul>
+<li>All the <code>product categories</code> follows a linear relationship where higher cancellations lead to higher revenue loss with just one exception, i.e. <code>cool_stuff</code> category, it has the highest revenue loss <strong>R$ 15,153.48</strong> despite low cancellations (<strong>16</strong>), <code>sports_leisure</code> faces the highest number of order cancellation of <strong>51</strong> and has a revenue loss of <strong>R$ 9,411.85</strong>.</li>
+</ul>
+<hr>
+
+<h3 id='rfm'> 3.2 Customer Segmentation (RFM Analysis): </h3> 
+<a href='https://nishan-k.github.io/E-commerce-SQL-Analytics/03_Customer_Segmentation_(RFM%20Analysis).html'> Open Notebook🔗 </a>
+
+<hr>
+
+<h4> a. What is the current customer recency profile?</h4>
+
+<ul>
+<li><p>On average, customers take approximately <strong>248 days</strong> to place their <code>second purchase</code>, indicating a <code>long repurchase cycle</code>.</p>
+</li>
+<li><p>Out of <strong>96,478 customers</strong>, only <strong>18,741</strong> return within <strong>1–100 days</strong>, while the majority (<strong>45,240 customers</strong>) make a <code>second purchase between</code> <strong>100–300 days</strong>.</p>
+</li>
+<li><p>A significant portion of customers show very long gaps between purchases, with <strong>25,406 customers</strong> returning after <strong>300–500 days</strong>, and <strong>7,091</strong> customers taking more than <strong>500 days</strong>.</p>
+</li>
+<li><p>Overall, repeat purchasing behavior is <code>heavily concentrated</code> in the <strong>100–300 day window</strong>, suggesting <code>low short-term retention and a slow repeat-purchase cycle</code>.</p>
+</li>
+</ul>
+<hr>
+
+<h4> b. What are the purchasing frequency patterns among customers?</h4>
+
+<ul>
+<li>The analysis is done by segmenting the customers into <code>5 different segements</code>:</li>
+</ul>
+<ol>
+<li><code>One-Time Buyer:</code> <strong>1 order</strong></li>
+<li><code>Returning Customer:</code> <strong>2 orders</strong></li>
+<li><code>Loyal Customer:</code> <strong>3 orders</strong></li>
+<li><code>Very Loyal Customer:</code> <strong>4 orders</strong></li>
+<li><code>VIP Customers</code>: <strong>5 or more orders</strong></li>
+</ol>
+<ul>
+<li>Where, the <code>One-Time Buyer</code> domniates the customer base accounting for <strong>96.947%</strong>, a total of <strong>90,557 customers</strong>.</li>
+<li><code>Returning</code> <strong>(2.756% or 2,573 customers)</strong> and <code>Loyal</code> <strong>(0.194% or 181 customers)</strong> form a much smaller but strategically important segment.</li>
+<li><code>Very Loyal</code> <strong>(0.030% or 28 customers)</strong> and <code>VIP</code> <strong>(0.020% or 19)</strong> customers represent a very small fraction but are likely to contribute disproportionately higher lifetime value.</li>
+</ul>
+<hr>
+
+<h4> c. Is revenue primarily driven by order volume or by high-value customers?</h4>
+
+<ul>
+<li>Order volume is the <strong>KEY</strong> revenue driver. The companys revenue <code>heavily relies on the One-Time Buyer</code>, with a total of <strong>90,557</strong> customers, <code>a total revenue</code> of <strong>R$ 14.55 M</strong>, with <code>an average revenue</code> of <strong>R$ 160.73</strong> per customer, and a <code>revenue contribution</code> of <strong>97.00 %.</strong></li>
+<li>The <code>value of the customer increases as the customer counts for their second purchase starts decreasing</code>, although, revenue contribution (%) for the rest of the segments except <code>One-Time Buyer</code> is <strong>&lt; 2.7%</strong>, value wise, the company earns on an average of <strong>R$ 291.02 to R$ 787.14</strong> per customer in other remaining <code>4 segments</code> while the average revenue per customer for <code>One-Time Buyer</code> is just <strong>R$ 160.73.</strong></li>
+<li>A table below summarizes the <strong>Volume Vs Value</strong> for the company:</li>
+</ul>
+<p><img src="images/rfm.png" alt="RFM"></p>
+<hr>
+
+
+<h3 id='growth'> 3.3 Regional Performance With Growth Trends: </h3> 
+<a href='https://nishan-k.github.io/E-commerce-SQL-Analytics/04_Regional_Performance_with_Growth_Trends.html'> Open Notebook🔗 </a>
+
+<hr>
+
+<h4> a. How is revenue distributed across states?</h4>
+
+<ul>
+<li><p>Out of <strong>27</strong> states, <code>São Paulo</code> is the highest revenue-generating state, contributing <strong>R$ 5,773,869.02 (37.44% of total revenue).</strong></p>
+</li>
+<li><p><code>Roraima</code> is the lowest revenue-generating state, contributing <strong>R$ 9,039.52 (0.06% of total revenue).</strong></p>
+</li>
+</ul>
+<hr>
+
+
+<h4> b. How is order volume distributed across states?</h4>
+
+<ul>
+<li><p><code>São Paulo</code> has the highest volume (<strong>40,519 orders or 42.0%</strong>) for orders and is also the highest revenue generating state.</p>
+</li>
+<li><p><code>Roraima</code> has the lowest volume (<strong>41 orders or 0.04%</strong>) for orders and is also the lowest revenue generating state.</p>
+</li>
+</ul>
+<p>The <code>Volume of Order and Revenue Generation</code> has a linear relationship for majority of the states.</p>
+<hr>
+
+<h4> c. Are high-revenue states driven by higher order volume or higher average order value (AOV)?</h4>
+
+<ul>
+<li><code>Paraíba</code> state has the highest <code>AOV</code> of <strong>1.68x</strong> but is the lowest revenue generating state, contributing <strong>0.89%</strong> in the <code>total revenue</code>, with the lowest number of orders contribution <strong>0.53%</strong> in the <code>total order-volume.</code></li>
+<li><code>São Paulo</code> state has the lowest <code>AOV</code> of <strong>0.89x</strong> but is the <code>highest revenue generating state</code>, with a contribution of <strong>37.44%</strong>, in <code>the total revenue</code>, with the highest number of orders contribution <strong>42.00%</strong>, in <code>the total order-volume.</code></li>
+<li><code>AOV and Order volume</code> shows <code>an inverse relationship</code>, several states exhibit high AOV but low order volume, <code>indicating premium but niche markets.</code></li>
+</ul>
+<hr>
+
+<h4> d. What is the trend between revenue and order volume over time for the top-performing states?</h4>
+
+<ul>
+<li>Revenue and order volume exhibit nearly identical growth patterns, indicating that <code>revenue growth is primarily driven by increasing order volume rather than price effects.</code></li>
+<li><code>São Paulo</code> consistently leads across time with <code>the highest order volume</code> of <strong>46,448.00</strong> and <code>shows the steepest growth trajectory, significantly outperforming other states.</code></li>
+<li><code>São Paulo</code> is also the<code> highest revenue-generating state</code> of <strong>$R5,769,703.15</strong>, reinforcing its role as the primary growth engine for the business.</li>
+</ul>
+<h2 id="tech">4. Tech Stack</h2>
+
+<ul>
+<li><p>Programming and analysis:</p>
+<ul>
+<li>Python (Pandas, NumPy)</li>
+<li>SQL (JOINS, AGGREGATION, WINDOW FUNCTIONS)</li>
+</ul>
+</li>
+<li><p>Data visualization:</p>
+<ul>
+<li>Plotly (interactive charts)</li>
+<li>Matplotlib</li>
+</ul>
+</li>
+<li><p>Environment and tools:</p>
+<ul>
+<li>Anaconda (virtual environment)</li>
+<li>Jupyter Notebook</li>
+<li>GitHub (version control and project hosting)</li>
+</ul>
+</li>
+</ul>
+<h2 id="structure">5. Project Structure</h2>
+ <hr>
+
+
+
+<pre><code>├── data/  
+│   └── raw/                  # Raw CSV files used to create the e-commerce database  
+├── docs/                     # Exported HTML notebooks for GitHub viewing  
+├── notebooks/                # Jupyter notebooks with analysis, interactive visuals, and insights  
+├── plots/                    # Reusable Python functions for Plotly visualizations  
+├── plot_html/                # Interactive Plotly charts saved as HTML  
+├── sql/                      # SQL queries used for metric calculations  
+│   ├── 02_Revenue_Leakage_Analysis/  
+│   ├── 03_Customer_Segmentation_(RFM_Analysis)/  
+│   └── 04_Regional_Performance_with_Growth_Trends/  
+├── src/                      # Python modules executing SQL and computing metrics  
+│   ├── revenue_leakage/  
+│   ├── rfm_analysis/  
+│   └── regional_performance/  
+└── utils/                    # Helper and utility functions
+</code></pre>
